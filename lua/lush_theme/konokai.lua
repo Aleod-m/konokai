@@ -45,11 +45,10 @@
 local lush = require('lush')
 local hsl = lush.hsl
 
-local K = {}
 -- LSP/Linters mistakenly show `undefined global` errors in the spec, they may
 -- support an annotation like the following. Consult your server documentation.
 ---@diagnostic disable: undefined-global
-K.theme = lush(function()
+local theme = lush(function()
   background = hsl("#191919")
   foreground = hsl("#c4c4b5")
   green      = hsl("#97e023")
@@ -130,6 +129,7 @@ K.theme = lush(function()
     StatusLineNC { fg = grey, bg = Normal.bg }, -- Status lines of not-current windows. Note: If this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
     TabLine      { fg = grey, bg = Normal.bg }, -- Tab pages line, not active tab page label
     TabLineFill  { bg = Normal.bg.li(10) }, -- Tab pages line, where there are no labels
+
     -- TabLineSel   { }, -- Tab pages line, active tab page label
         
     Title        { fg = red, gui = "bold" }, -- Titles for output from ":set all", ":autocmd" etc.
@@ -305,21 +305,9 @@ K.theme = lush(function()
     -- TSVariableBuiltin    { } , -- Variable names defined by the language: `this` or `self` in Javascript.
   }
 end)
-K.colors = {
-    background = hsl("#191919"),
-    foreground = hsl("#c4c4b5"),
-    green      = hsl("#97e023"),
-    orange     = hsl("#fa8419"),
-    yellow     = hsl("#dfd561"),
-    purple     = hsl("#9c64fe"),
-    red        = hsl("#f3005f"),
-    cyan       = hsl("#57d1ea"),
-    blue       = hsl("#57d1ea").da(30),
-    grey       = hsl("#c4c4b5").da(30),
-    white      = hsl("#f6f6ee"),
-}
+
 
 -- Return our parsed theme for extension or use elsewhere.
-return K
+return theme
 
 -- vi:nowrap
