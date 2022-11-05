@@ -17,4 +17,4 @@ vim.g.colors_name = 'konokai'
 package.loaded['lush_theme.kookai'] = nil
 
 -- include our theme file and pass it to lush to apply
-require('lush')(require('lush_theme.konokai').theme)
+require('lush')(require('lush_theme.konokai'))
