@@ -18,7 +18,3 @@ package.loaded['lush_theme.kookai'] = nil
 
 -- include our theme file and pass it to lush to apply
 require('lush')(require('lush_theme.konokai'))
-
-return {
-    palette = require'luash_theme.konokai'.palette
-}
