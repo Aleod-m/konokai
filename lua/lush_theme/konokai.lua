@@ -45,47 +45,21 @@
 local lush = require('lush')
 local hsl = lush.hsl
 
--- Theme base colors.
---   bg_one = hsl("#30323a")
---   bg_two = hsl("#363944")
---   bg_three = hsl("#3b3e48")
---   bg_four = hsl("#414550")
---   bg_red = hsl("#fc5d7c")
---   bg_green = hsl("#a7df78")
---   bg_blue = hsl("#85d3f2")
---   palette_black = hsl("#181819")
---   palette_red = hsl("#fc5d7c")
---   palette_orange = hsl("#f39660")
---   palette_yellow = hsl("#e7c664")
---   palette_green = hsl("#0ed072")
---   palette_blue = hsl("#76cce0")
---   palette_purple = hsl("#b39df3")
---   palette_gray = hsl("#7f8490")
---   syntax_type = palette_blue
---   syntax_structure = palette_blue
---   syntax_storageclass = palette_blue
---   syntax_identifier = palette_orange
---   syntax_constant = palette_orange
---   syntax_preproc = palette_red
---   syntax_statement = palette_red
---   syntax_special = palette_purple
---   syntax_number = palette_purple
---   syntax_function = palette_green
 -- LSP/Linters mistakenly show `undefined global` errors in the spec, they may
 -- support an annotation like the following. Consult your server documentation.
 ---@diagnostic disable: undefined-global
 local theme = lush(function()
-    background = hsl("#191919")
-    foreground = hsl("#c4c4b5")
-    green      = hsl("#97e023")
-    orange     = hsl("#fa8419")
-    yellow     = hsl("#dfd561")
-    purple     = hsl("#9c64fe")
-    red        = hsl("#f3005f")
-    cyan       = hsl("#57d1ea")
-    blue       = hsl("#57d1ea").da(30)
-    grey       = hsl("#c4c4b5").da(30)
-    white      = hsl("#f6f6ee")
+  background = hsl("#191919")
+  foreground = hsl("#c4c4b5")
+  green      = hsl("#97e023")
+  orange     = hsl("#fa8419")
+  yellow     = hsl("#dfd561")
+  purple     = hsl("#9c64fe")
+  red        = hsl("#f3005f")
+  cyan       = hsl("#57d1ea")
+  blue       = hsl("#57d1ea").da(30)
+  grey       = hsl("#c4c4b5").da(30)
+  white      = hsl("#f6f6ee")
   return {
     -- The following are the Neovim (as of 0.8.0-dev+100-g371dfb174) highlight
     -- groups, mostly used for styling UI elements.
@@ -330,6 +304,19 @@ local theme = lush(function()
     -- TSVariableBuiltin    { } , -- Variable names defined by the language: `this` or `self` in Javascript.
   }
 end)
+theme.palette = {
+    background = hsl("#191919")
+    foreground = hsl("#c4c4b5")
+    green      = hsl("#97e023")
+    orange     = hsl("#fa8419")
+    yellow     = hsl("#dfd561")
+    purple     = hsl("#9c64fe")
+    red        = hsl("#f3005f")
+    cyan       = hsl("#57d1ea")
+    blue       = hsl("#57d1ea").da(30)
+    grey       = hsl("#c4c4b5").da(30)
+    white      = hsl("#f6f6ee")
+}
 
 -- Return our parsed theme for extension or use elsewhere.
 return theme
