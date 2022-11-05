@@ -45,10 +45,11 @@
 local lush = require('lush')
 local hsl = lush.hsl
 
+local K = {}
 -- LSP/Linters mistakenly show `undefined global` errors in the spec, they may
 -- support an annotation like the following. Consult your server documentation.
 ---@diagnostic disable: undefined-global
-local theme = lush(function()
+K.theme = lush(function()
   background = hsl("#191919")
   foreground = hsl("#c4c4b5")
   green      = hsl("#97e023")
@@ -304,7 +305,7 @@ local theme = lush(function()
     -- TSVariableBuiltin    { } , -- Variable names defined by the language: `this` or `self` in Javascript.
   }
 end)
-theme.palette = {
+K.colors = {
     background = hsl("#191919"),
     foreground = hsl("#c4c4b5"),
     green      = hsl("#97e023"),
@@ -319,6 +320,6 @@ theme.palette = {
 }
 
 -- Return our parsed theme for extension or use elsewhere.
-return theme
+return K
 
 -- vi:nowrap
