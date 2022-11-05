@@ -129,7 +129,6 @@ local theme = lush(function()
     StatusLineNC { fg = grey, bg = Normal.bg }, -- Status lines of not-current windows. Note: If this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
     TabLine      { fg = grey, bg = Normal.bg }, -- Tab pages line, not active tab page label
     TabLineFill  { bg = Normal.bg.li(10) }, -- Tab pages line, where there are no labels
-{
     -- TabLineSel   { }, -- Tab pages line, active tab page label
         
     Title        { fg = red, gui = "bold" }, -- Titles for output from ":set all", ":autocmd" etc.
