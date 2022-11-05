@@ -305,7 +305,7 @@ local theme = lush(function()
     -- TSVariableBuiltin    { } , -- Variable names defined by the language: `this` or `self` in Javascript.
   }
 end)
-}
+
 
 -- Return our parsed theme for extension or use elsewhere.
 return theme
