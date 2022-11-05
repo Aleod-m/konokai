@@ -96,7 +96,7 @@ local theme = lush(function()
     -- NormalFloat { }
     -- NormalNC     { }, -- normal text in non-current windows
     Folded       { fg = Normal.fg.da(20), bg = Normal.bg.li(5)}, -- Line used for closed folds
-    ndOfBuffer  { bg = background.da(10), fg = foreground}, -- Filler lines (~) after the end of the buffer. By default, this is highlighted like |hl-NonText|.
+    endOfBuffer  { bg = background.da(10), fg = foreground}, -- Filler lines (~) after the end of the buffer. By default, this is highlighted like |hl-NonText|.
 
 
     Cursor       { bg = Normal.fg }, -- Character under the cursor
@@ -176,7 +176,7 @@ local theme = lush(function()
     Comment        { fg = grey }, -- Any comment
 
     Constant       { fg = orange }, -- (*) Any constant
-    Identifier     { fg = orange }, -- (*) Any variable name
+    Identifier     { fg = Normal.fg }, -- (*) Any variable name
 
     litteral       { fg = yellow },
     String         { litteral }, --   A string constant: "this is a string"
