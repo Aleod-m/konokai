@@ -37,7 +37,7 @@
 -- Enable lush.ify on this file, run:
 --
 --  `:Lushify`
---
+--    
 --  or
 --
 --  `:lua require('lush').ify()`
@@ -48,17 +48,18 @@ local hsl = lush.hsl
 -- LSP/Linters mistakenly show `undefined global` errors in the spec, they may
 -- support an annotation like the following. Consult your server documentation.
 ---@diagnostic disable: undefined-global
-local theme = lush(function()
-  background = hsl("#191919")
-  foreground = hsl("#c4c4b5")
+local theme = lush(function(injected_function)
+  local sym = injected_function.sym
+  black      = hsl("#191919")
   green      = hsl("#97e023")
   orange     = hsl("#fa8419")
   yellow     = hsl("#dfd561")
   purple     = hsl("#9c64fe")
   red        = hsl("#f3005f")
   cyan       = hsl("#57d1ea")
-  blue       = hsl("#57d1ea").da(30)
-  grey       = hsl("#c4c4b5").da(30)
+  blue       = hsl("#0e6172")
+  grey       = hsl("#929276")
+  grey_light = hsl("#c4c4b5")
   white      = hsl("#f6f6ee")
   return {
     -- The following are the Neovim (as of 0.8.0-dev+100-g371dfb174) highlight
@@ -66,11 +67,12 @@ local theme = lush(function()
     -- Comment them out and add your own properties to override the defaults.
     -- An empty definition `{}` will clear all styling, leaving elements looking
     -- like the 'Normal' group.
-    Normal { bg = background, fg = white }, -- hsl("#e2e2e3"), bg=hsl("#2c2e34")
-    -- NormalFloat { }
+
+    Normal { bg = black, fg = white }, -- hsl("#e2e2e3"), bg=hsl("#2c2e34")
+    -- NormalFloat { fg = grey, bg = Normal.bg },
     -- NormalNC     { }, -- normal text in non-current windows
     Folded       { fg = Normal.fg.da(20), bg = Normal.bg.li(5)}, -- Line used for closed folds
-    endOfBuffer  { bg = background.da(10), fg = background.da(10)}, -- Filler lines (~) after the end of the buffer. By default, this is highlighted like |hl-NonText|.
+    endOfBuffer  { bg = black.da(10), fg = black.da(10)}, -- Filler lines (~) after the end of the buffer. By default, this is highlighted like |hl-NonText|.
 
 
     Cursor       { bg = Normal.fg }, -- Character under the cursor
@@ -98,7 +100,7 @@ local theme = lush(function()
     DiffAdd      { bg = cyan.da(60), fg = cyan}, -- Diff mode: Added line |diff.txt|
     DiffChange   { bg = green.da(60), fg = green}, -- Diff mode: Changed line |diff.txt|
     DiffDelete   { bg = red.da(60), fg = red}, -- Diff mode: Deleted line |diff.txt|
-    DiffText     { fg = red.da(60) , bg = red }, -- Diff mode: Changed text within a changed line |diff.txt|
+    DiffText     { fg = red.da(60) , bg = yellow }, -- Diff mode: Changed text within a changed line |diff.txt|
 
     Directory    { fg = cyan }, -- Directory names (and other special names in listings)
 
@@ -169,6 +171,9 @@ local theme = lush(function()
     -- Operator       { }, --   "sizeof", "+", "*", etc.
     -- Keyword        { }, --   any other keyword
     -- Exception      { }, --   try, catch, throw
+    
+    sym("@rust.keyword") { Statement },
+
     Label          { fg = purple }, --   case, default, etc.
 
     PreProc        { fg = red }, -- (*) Generic Preprocessor
@@ -194,6 +199,11 @@ local theme = lush(function()
     Ignore         { Comment }, -- Left blank, hidden |hl-Ignore| (NOTE: May be invisible here in template)
     Error          { fg = red }, -- Any erroneous construct
     Todo           { fg = blue }, -- Anything that needs extra attention; mostly the keywords TODO FIXME and XXX
+
+
+    GitSignsAdd { bg = cyan.da(60), fg = cyan}, -- Diff mode: Added line |diff.txt|
+    GitSignsChange { bg = green.da(60), fg = green}, -- Diff mode: Changed line |diff.txt|
+    GitSignsDelete { bg = red.da(60), fg = red}, -- Diff mode: Deleted line |diff.txt|
 
     -- These groups are for the native LSP client and diagnostic system. Some
     -- other LSP clients may use these groups, or use their own. Consult your
