@@ -1,47 +1,3 @@
---
--- Built with,
---
---        ,gggg,
---       d8" "8I                         ,dPYb,
---       88  ,dP                         IP'`Yb
---    8888888P"                          I8  8I
---       88                              I8  8'
---       88        gg      gg    ,g,     I8 dPgg,
---  ,aa,_88        I8      8I   ,8'8,    I8dP" "8I
--- dP" "88P        I8,    ,8I  ,8'  Yb   I8P    I8
--- Yb,_,d88b,,_   ,d8b,  ,d8b,,8'_   8) ,d8     I8,
---  "Y8P"  "Y888888P'"Y88P"`Y8P' "YY8P8P88P     `Y8
---
-
--- This is a starter colorscheme for use with Lush,
--- for usage guides, see :h lush or :LushRunTutorial
-
---
--- Note: Because this is a lua file, vim will append it to the runtime,
---       which means you can require(...) it in other lua code (this is useful),
---       but you should also take care not to conflict with other libraries.
---
---       (This is a lua quirk, as it has somewhat poor support for namespacing.)
---
---       Basically, name your file,
---
---       "super_theme/lua/lush_theme/super_theme_dark.lua",
---
---       not,
---
---       "super_theme/lua/dark.lua".
---
---       With that caveat out of the way...
---
-
--- Enable lush.ify on this file, run:
---
---  `:Lushify`
---    
---  or
---
---  `:lua require('lush').ify()`
-
 local lush = require('lush')
 local hsl = lush.hsl
 
@@ -68,8 +24,9 @@ local theme = lush(function(injected_function)
     -- An empty definition `{}` will clear all styling, leaving elements looking
     -- like the 'Normal' group.
 
-    Normal { bg = black, fg = white }, -- hsl("#e2e2e3"), bg=hsl("#2c2e34")
-    -- NormalFloat { fg = grey, bg = Normal.bg },
+    Normal { bg = black, fg = white },
+    NormalFloat { Normal },
+
     -- NormalNC     { }, -- normal text in non-current windows
     Folded       { fg = Normal.fg.da(20), bg = Normal.bg.li(5)}, -- Line used for closed folds
     endOfBuffer  { bg = black.da(10), fg = black.da(10)}, -- Filler lines (~) after the end of the buffer. By default, this is highlighted like |hl-NonText|.
@@ -84,7 +41,7 @@ local theme = lush(function(injected_function)
 
     cursor_pos   { bg = Normal.bg.li(5) },
     CursorColumn { cursor_pos }, --  Screen-column at the cursor, when 'cursorcolumn' is set.
-    CursorLine   { cursor_pos }, -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
+    CursorLine   { bg = Normal.bg.li(5)}, -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
     ColorColumn  { cursor_pos }, -- Columns set with 'colorcolumn'
     CursorLineNr { bg = CursorLine.bg, fg = CursorLine.bg.li(20) }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
 
@@ -105,7 +62,7 @@ local theme = lush(function(injected_function)
     Directory    { fg = cyan }, -- Directory names (and other special names in listings)
 
     -- Conceal      { }, -- Placeholder characters substituted for concealed text (see 'conceallevel')
-    -- ErrorMsg     { }, -- Error messages on the command line
+    ErrorMsg     { fg = red }, -- Error messages on the command line
     -- FoldColumn   { }, -- 'foldcolumn'
     -- IncSearch    { }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
     -- Substitute   { }, -- |:substitute| replacement text highlighting
@@ -114,8 +71,8 @@ local theme = lush(function(injected_function)
     -- MsgSeparator { }, -- Separator for scrolled messages, `msgsep` flag of 'display'
     MoreMsg      { fg = blue }, -- |more-prompt|
     -- NonText      { }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
-    -- Question     { }, -- |hit-enter| prompt and yes/no questions
-    -- QuickFixLine { }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
+    Question     { fg=cyan }, -- |hit-enter| prompt and yes/no questions
+    QuickFixLine { fg=cyan }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
 
     Search       { bg = Normal.bg.li(20), fg = Normal.fg }, -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
     IncSearch       { bg = Normal.bg.li(20), fg = Normal.fg }, -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
@@ -138,7 +95,9 @@ local theme = lush(function(injected_function)
     VisualNOS    { Visual }, -- Visual mode selection when vim is "Not Owning the Selection".
     WarningMsg   { fg = yellow }, -- Warning messages
     Whitespace   { bg = Normal.bg.li(40)}, -- "nbsp", "space", "tab" and "trail" in 'listchars'
-    -- Winseparator { }, -- Separator between window splits. Inherts from |hl-VertSplit| by default, which it will replace eventually.
+    Winseparator { fg = Normal.bg.li(40)}, -- Separator between window splits. Inherts from |hl-VertSplit| by default, which it will replace eventually.
+    FloatBorder  { fg = Normal.bg.li(40)},
+    FloatShadow { fg = Normal.bg.li(40)},
     -- WildMenu     { }, -- Current match in 'wildmenu' completion
 
     -- Common vim syntax groups used for all kinds of code and markup.
@@ -198,7 +157,7 @@ local theme = lush(function(injected_function)
 
     Ignore         { Comment }, -- Left blank, hidden |hl-Ignore| (NOTE: May be invisible here in template)
     Error          { fg = red }, -- Any erroneous construct
-    Todo           { fg = blue }, -- Anything that needs extra attention; mostly the keywords TODO FIXME and XXX
+    Todo           { fg = orange.li(50)}, -- Anything that needs extra attention; mostly the keywords TODO FIXME and XXX
 
 
     GitSignsAdd { bg = cyan.da(60), fg = cyan}, -- Diff mode: Added line |diff.txt|
@@ -220,10 +179,10 @@ local theme = lush(function(injected_function)
 
     -- See :h diagnostic-highlights, some groups may not be listed, submit a PR fix to lush-template!
     --
-    -- DiagnosticError            { } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-    -- DiagnosticWarn             { } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-    -- DiagnosticInfo             { } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-    -- DiagnosticHint             { } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
+    DiagnosticError            { Error } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
+    DiagnosticWarn             { fg=yellow.sa(50) } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
+    DiagnosticInfo             { fg=cyan } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
+    DiagnosticHint             { fg=blue.li(20) } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
     -- DiagnosticVirtualTextError { } , -- Used for "Error" diagnostic virtual text.
     -- DiagnosticVirtualTextWarn  { } , -- Used for "Warn" diagnostic virtual text.
     -- DiagnosticVirtualTextInfo  { } , -- Used for "Info" diagnostic virtual text.
@@ -240,83 +199,8 @@ local theme = lush(function(injected_function)
     -- DiagnosticSignWarn         { } , -- Used for "Warn" signs in sign column.
     -- DiagnosticSignInfo         { } , -- Used for "Info" signs in sign column.
     -- DiagnosticSignHint         { } , -- Used for "Hint" signs in sign column.
-
-    -- Tree-Sitter syntax groups. Most link to corresponding
-    -- vim syntax groups (e.g. TSKeyword => Keyword) by default.
-    --
-    -- See :h nvim-treesitter-highlights, some groups may not be listed, submit a PR fix to lush-template!
-    --
-    -- TSAttribute          { } , -- Annotations that can be attached to the code to denote some kind of meta information. e.g. C++/Dart attributes.
-    -- TSBoolean            { value } , -- Boolean literals: `True` and `False` in Python.
-    -- TSCharacter          { litteral } , -- Character literals: `'a'` in C.
-    -- TSCharacterSpecial   { } , -- Special characters.
-    -- TSComment            { Comment } , -- Line comments and block comments.
-    -- TSConditional        { Statement } , -- Keywords related to conditionals: `if`, `when`, `cond`, etc.
-    -- TSConstant           { Constant } , -- Constants identifiers. These might not be semantically constant. E.g. uppercase variables in Python.
-    -- TSConstBuiltin       { Constant } , -- Built-in constant values: `nil` in Lua.
-    -- TSConstMacro         { Constant } , -- Constants defined by macros: `NULL` in C.
-    -- TSConstructor        { } , -- Constructor calls and definitions: `{}` in Lua, and Java constructors.
-    -- TSDebug              { } , -- Debugging statements.
-    -- TSDefine             { PreProc} , -- Preprocessor #define statements.
-    -- TSError              { } , -- Syntax/parser errors. This might highlight large sections of code while the user is typing still incomplete code, use a sensible highlight.
-    -- TSException          { } , -- Exception related keywords: `try`, `except`, `finally` in Python.
-    -- TSField              { fg = green } , -- Object and struct fields.
-    -- TSFloat              { value } , -- Floating-point number literals.
-    -- TSFunction           { Function } , -- Function calls and definitions.
-    -- TSFuncBuiltin        { Function } , -- Built-in functions: `print` in Lua.
-    -- TSFuncMacro          { Function } , -- Macro defined functions (calls and definitions): each `macro_rules` in Rust.
-    -- TSInclude            { PreProc } , -- File or module inclusion keywords: `#include` in C, `use` or `extern crate` in Rust.
-    -- TSKeyword            { Statement } , -- Keywords that don't fit into other categories.
-    -- TSKeywordFunction    { } , -- Keywords used to define a function: `function` in Lua, `def` and `lambda` in Python.
-    -- TSKeywordOperator    { } , -- Unary and binary operators that are English words: `and`, `or` in Python; `sizeof` in C.
-    -- TSKeywordReturn      { Statement } , -- Keywords like `return` and `yield`.
-    -- TSLabel              { } , -- GOTO labels: `label:` in C, and `::label::` in Lua.
-    -- TSMethod             { Function } , -- Method calls and definitions.
-    -- TSNamespace          { } , -- Identifiers referring to modules and namespaces.
-    -- TSNone               { } , -- No highlighting (sets all highlight arguments to `NONE`). this group is used to clear certain ranges, for example, string interpolations. Don't change the values of this highlight group.
-    -- TSNumber             { value } , -- Numeric literals that don't fit into other categories.
-    -- TSOperator           { fg = red } , -- Binary or unary operators: `+`, and also `->` and `*` in C.
-    -- TSParameter          { Normal } , -- Parameters of a function.
-    -- TSParameterReference { } , -- References to parameters of a function.
-    -- TSPreProc            { PreProc } , -- Preprocessor #if, #else, #endif, etc.
-    -- TSProperty           { TSField } , -- Same as `TSField`.
-    -- TSPunctDelimiter     { Delimiter} , -- Punctuation delimiters: Periods, commas, semicolons, etc.
-    -- TSPunctBracket       { Delimiter } , -- Brackets, braces, parentheses, etc.
-    -- TSPunctSpecial       { } , -- Special punctuation that doesn't fit into the previous categories.
-    -- TSRepeat             { Keyword } , -- Keywords related to loops: `for`, `while`, etc.
-    -- TSStorageClass       { Keyword } , -- Keywords that affect how a variable is stored: `static`, `comptime`, `extern`, etc.
-    -- TSString             { litteral } , -- String literals.
-    -- TSStringRegex        { litteral } , -- Regular expression literals.
-    -- TSStringEscape       { fg = green } , -- Escape characters within a string: `\n`, `\t`, etc.
-    -- TSStringSpecial      { litteral } , -- Strings with special meaning that don't fit into the previous categories.
-    -- TSSymbol             { } , -- Identifiers referring to symbols or atoms.
-    -- TSTag                { Keyword } , -- Tags like HTML tag names.
-    -- TSTagAttribute       { } , -- HTML tag attributes.
-    -- TSTagDelimiter       { Delimiter } , -- Tag delimiters like `<` `>` `/`.
-    -- TSText               { Normal } , -- Non-structured text. Like text in a markup language.
-    -- TSStrong             { } , -- Text to be represented in bold.
-    -- TSEmphasis           { } , -- Text to be represented with emphasis.
-    -- TSUnderline          { } , -- Text to be represented with an underline.
-    -- TSStrike             { } , -- Strikethrough text.
-    -- TSTitle              { } , -- Text that is part of a title.
-    -- TSLiteral            { } , -- Literal or verbatim text.
-    -- TSURI                { } , -- URIs like hyperlinks or email addresses.
-    -- TSMath               { } , -- Math environments like LaTeX's `$ ... $`
-    -- TSTextReference      { } , -- Footnotes, text references, citations, etc.
-    -- TSEnvironment        { } , -- Text environments of markup languages.
-    -- TSEnvironmentName    { } , -- Text/string indicating the type of text environment. Like the name of a `\begin` block in LaTeX.
-    -- TSNote               { } , -- Text representation of an informational note.
-    -- TSWarning            { } , -- Text representation of a warning note.
-    -- TSDanger             { } , -- Text representation of a danger note.
-    -- TSType               { Type } , -- Type (and class) definitions and annotations.
-    -- TSTypeBuiltin        { Type } , -- Built-in types: `i32` in Rust.
-    -- TSVariable           { Normal } , -- Variable names that don't fit into other categories.
-    -- TSVariableBuiltin    { fg = orange } , -- Variable names defined by the language: `this` or `self` in Javascript.
   }
 end)
-
-
 -- Return our parsed theme for extension or use elsewhere.
 return theme
 
--- vi:nowrap
