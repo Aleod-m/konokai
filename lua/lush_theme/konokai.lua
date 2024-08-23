@@ -94,10 +94,10 @@ local theme = lush(function(injected_function)
     Visual       { CursorLine }, -- Visual mode selection
     VisualNOS    { Visual }, -- Visual mode selection when vim is "Not Owning the Selection".
     WarningMsg   { fg = yellow }, -- Warning messages
-    Whitespace   { bg = Normal.bg.li(40)}, -- "nbsp", "space", "tab" and "trail" in 'listchars'
-    Winseparator { fg = Normal.bg.li(40)}, -- Separator between window splits. Inherts from |hl-VertSplit| by default, which it will replace eventually.
-    FloatBorder  { fg = Normal.bg.li(40)},
-    FloatShadow { fg = Normal.bg.li(40)},
+    Whitespace   { bg = Normal.bg.li(40) }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
+    Winseparator { fg = Normal.bg.li(40) }, -- Separator between window splits. Inherts from |hl-VertSplit| by default, which it will replace eventually.
+    FloatBorder  { fg = Normal.bg.li(40) },
+    FloatShadow { fg = Normal.bg.li(40) },
     -- WildMenu     { }, -- Current match in 'wildmenu' completion
 
     -- Common vim syntax groups used for all kinds of code and markup.
@@ -127,7 +127,7 @@ local theme = lush(function(injected_function)
     Statement      { fg = red }, -- (*) Any statement
     -- Conditional    { }, --   if, then, else, endif, switch, etc.
     -- Repeat         { }, --   for, do, while, etc.
-    -- Operator       { }, --   "sizeof", "+", "*", etc.
+    Operator       { Statement }, --   "sizeof", "+", "*", etc.
     -- Keyword        { }, --   any other keyword
     -- Exception      { }, --   try, catch, throw
     
@@ -157,12 +157,12 @@ local theme = lush(function(injected_function)
 
     Ignore         { Comment }, -- Left blank, hidden |hl-Ignore| (NOTE: May be invisible here in template)
     Error          { fg = red }, -- Any erroneous construct
-    Todo           { fg = orange.li(50)}, -- Anything that needs extra attention; mostly the keywords TODO FIXME and XXX
+    Todo           { fg = orange.li(50) }, -- Anything that needs extra attention; mostly the keywords TODO FIXME and XXX
 
 
-    GitSignsAdd { bg = cyan.da(60), fg = cyan}, -- Diff mode: Added line |diff.txt|
-    GitSignsChange { bg = green.da(60), fg = green}, -- Diff mode: Changed line |diff.txt|
-    GitSignsDelete { bg = red.da(60), fg = red}, -- Diff mode: Deleted line |diff.txt|
+    GitSignsAdd { bg = cyan.da(60), fg = cyan }, -- Diff mode: Added line |diff.txt|
+    GitSignsChange { bg = green.da(60), fg = green }, -- Diff mode: Changed line |diff.txt|
+    GitSignsDelete { bg = red.da(60), fg = red }, -- Diff mode: Deleted line |diff.txt|
 
     -- These groups are for the native LSP client and diagnostic system. Some
     -- other LSP clients may use these groups, or use their own. Consult your
@@ -180,9 +180,9 @@ local theme = lush(function(injected_function)
     -- See :h diagnostic-highlights, some groups may not be listed, submit a PR fix to lush-template!
     --
     DiagnosticError            { Error } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-    DiagnosticWarn             { fg=yellow.sa(50) } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-    DiagnosticInfo             { fg=cyan } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-    DiagnosticHint             { fg=blue.li(20) } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
+    DiagnosticWarn             { fg = yellow.sa(50) } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
+    DiagnosticInfo             { fg = cyan } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
+    DiagnosticHint             { fg = blue.li(20) } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
     -- DiagnosticVirtualTextError { } , -- Used for "Error" diagnostic virtual text.
     -- DiagnosticVirtualTextWarn  { } , -- Used for "Warn" diagnostic virtual text.
     -- DiagnosticVirtualTextInfo  { } , -- Used for "Info" diagnostic virtual text.
