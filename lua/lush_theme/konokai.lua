@@ -29,7 +29,7 @@ local theme = lush(function(injected_function)
 
     -- NormalNC     { }, -- normal text in non-current windows
     Folded       { fg = Normal.fg.da(20), bg = Normal.bg.li(5)}, -- Line used for closed folds
-    endOfBuffer  { bg = black.da(10), fg = black.da(10)}, -- Filler lines (~) after the end of the buffer. By default, this is highlighted like |hl-NonText|.
+    EndOfBuffer  { bg = black.da(10), fg = black.da(10) }, -- Filler lines (~) after the end of the buffer. By default, this is highlighted like |hl-NonText|.
 
 
     Cursor       { bg = Normal.fg }, -- Character under the cursor
@@ -71,6 +71,7 @@ local theme = lush(function(injected_function)
     -- MsgSeparator { }, -- Separator for scrolled messages, `msgsep` flag of 'display'
     MoreMsg      { fg = blue }, -- |more-prompt|
     -- NonText      { }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
+    Whitespace   { bg = Normal.bg, fg = Normal.bg.li(20) }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
     Question     { fg=cyan }, -- |hit-enter| prompt and yes/no questions
     QuickFixLine { fg=cyan }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
 
@@ -94,7 +95,6 @@ local theme = lush(function(injected_function)
     Visual       { CursorLine }, -- Visual mode selection
     VisualNOS    { Visual }, -- Visual mode selection when vim is "Not Owning the Selection".
     WarningMsg   { fg = yellow }, -- Warning messages
-    Whitespace   { bg = Normal.bg.li(40) }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
     Winseparator { fg = Normal.bg.li(40) }, -- Separator between window splits. Inherts from |hl-VertSplit| by default, which it will replace eventually.
     FloatBorder  { fg = Normal.bg.li(40) },
     FloatShadow { fg = Normal.bg.li(40) },
