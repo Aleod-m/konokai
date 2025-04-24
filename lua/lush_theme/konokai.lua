@@ -199,6 +199,13 @@ local theme = lush(function(injected_function)
     -- DiagnosticSignWarn         { } , -- Used for "Warn" signs in sign column.
     -- DiagnosticSignInfo         { } , -- Used for "Info" signs in sign column.
     -- DiagnosticSignHint         { } , -- Used for "Hint" signs in sign column.
+    --
+    NeogitGraphRed { fg = red },
+    NeogitGraphGreen { fg = green },
+    NeogitGraphBlue { fg = cyan },
+    NeogitGraphYellow { fg = yellow },
+    NeogitGraphPurple { fg = purple },
+    NeogitGraphOrange { fg = orange }
   }
 end)
 -- Return our parsed theme for extension or use elsewhere.
