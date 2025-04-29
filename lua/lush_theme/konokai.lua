@@ -9,17 +9,18 @@ local theme = lush(function(injected_function)
   black      = hsl("#191919")
   green      = hsl("#97e023")
   orange     = hsl("#fa8419")
-  yellow     = hsl("#dfd561")
+  yellow     = hsl("#ffef42")
   purple     = hsl("#9c64fe")
-  red        = hsl("#f3005f")
+  pink       = hsl("#fe71fa")
+  red        = hsl("#f3004f")
   cyan       = hsl("#57d1ea")
-  blue       = hsl("#0e6172")
+  blue       = hsl("#577cea")
   grey       = hsl("#929276")
   grey_light = hsl("#c4c4b5")
   white      = hsl("#f6f6ee")
   return {
     -- The following are the Neovim (as of 0.8.0-dev+100-g371dfb174) highlight
-    -- groups, mostly used for styling UI elements.
+    -- groups, mostly used2for styling UI elements.
     -- Comment them out and add your own properties to override the defaults.
     -- An empty definition `{}` will clear all styling, leaving elements looking
     -- like the 'Normal' group.
@@ -35,15 +36,15 @@ local theme = lush(function(injected_function)
     Cursor       { bg = Normal.fg }, -- Character under the cursor
     lCursor      { Cursor }, -- Character under the cursor when |language-mapping| is used (see 'guicursor')
     CursorIM     { Cursor }, -- Like Cursor, but used when in IME mode |CursorIM|
-    MatchParen   { bg = grey }, -- Character under the cursor
-    TermCursor   { Cursor }, -- Cursor in a focused terminal
+    MatchParen   { bg = Normal.bg.li(30)}, -- Character under the cursor
+    -- TermCursor   { Cursor }, -- Cursor in a focused terminal
     TermCursorNC { bg = Cursor.bg.da(40)}, -- Cursor in an unfocused terminal
 
     cursor_pos   { bg = Normal.bg.li(5) },
     CursorColumn { cursor_pos }, --  Screen-column at the cursor, when 'cursorcolumn' is set.
     CursorLine   { bg = Normal.bg.li(5)}, -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
     ColorColumn  { cursor_pos }, -- Columns set with 'colorcolumn'
-    CursorLineNr { bg = CursorLine.bg, fg = CursorLine.bg.li(20) }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
+    CursorLineNr { bg = CursorLine.bg, fg = CursorLine.bg.li(40) }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
 
     Pmenu        { bg = Normal.bg.li(10), fg = white }, -- Popup menu: Normal item.
     PmenuSel     { bg = Normal.bg.li(20), fg = cyan }, -- Popup menu: Selected item.
@@ -51,13 +52,14 @@ local theme = lush(function(injected_function)
     PmenuThumb   { bg = grey }, -- Popup menu: Thumb of the scrollbar.
     
     VertSplit    { fg = Normal.bg.li(20) }, -- Column separating vertically split windows
-    LineNr       { fg = Normal.bg.li(20), bg = Normal.bg.da(10) }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
+    LineNr       { fg = Normal.bg.li(30), bg = Normal.bg.da(10) }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
     SignColumn   { LineNr }, -- Column where |signs| are displayed
 
     DiffAdd      { bg = cyan.da(60), fg = cyan}, -- Diff mode: Added line |diff.txt|
     DiffChange   { bg = green.da(60), fg = green}, -- Diff mode: Changed line |diff.txt|
     DiffDelete   { bg = red.da(60), fg = red}, -- Diff mode: Deleted line |diff.txt|
-    DiffText     { fg = red.da(60) , bg = yellow }, -- Diff mode: Changed text within a changed line |diff.txt|
+    DiffText { bg = red.da(60), fg = pink }, -- Diff mode: Deleted line |diff.txt|
+    -- DiffText     { fg = red.da(60), bg = yellow }, -- Diff mode: Changed text within a changed line |diff.txt|
 
     Directory    { fg = cyan }, -- Directory names (and other special names in listings)
 
@@ -92,7 +94,7 @@ local theme = lush(function(injected_function)
     -- TabLineSel   { }, -- Tab pages line, active tab page label
         
     Title        { fg = red, gui = "bold" }, -- Titles for output from ":set all", ":autocmd" etc.
-    Visual       { CursorLine }, -- Visual mode selection
+    Visual       { bg = Normal.bg.li(20) }, -- Visual mode selection
     VisualNOS    { Visual }, -- Visual mode selection when vim is "Not Owning the Selection".
     WarningMsg   { fg = yellow }, -- Warning messages
     Winseparator { fg = Normal.bg.li(40) }, -- Separator between window splits. Inherts from |hl-VertSplit| by default, which it will replace eventually.
@@ -149,7 +151,7 @@ local theme = lush(function(injected_function)
     Special        { fg = red }, -- (*) Any special symbol
     SpecialChar    { Special }, --   Special character in a constant
     Tag            { fg = orange }, --   You can use CTRL-] on this
-    Delimiter      { fg = Normal.fg }, --   Character that needs attention
+    -- Delimiter      { }, --   Character that needs attention
     SpecialComment { Comment }, --   Special things inside a comment (e.g. '\n')
     Debug          { fg = yellow }, --   Debugging statements
 
@@ -157,7 +159,7 @@ local theme = lush(function(injected_function)
 
     Ignore         { Comment }, -- Left blank, hidden |hl-Ignore| (NOTE: May be invisible here in template)
     Error          { fg = red }, -- Any erroneous construct
-    Todo           { fg = orange.li(50) }, -- Anything that needs extra attention; mostly the keywords TODO FIXME and XXX
+    Todo           { fg = pink }, -- Anything that needs extra attention; mostly the keywords TODO FIXME and XXX
 
 
     GitSignsAdd { bg = cyan.da(60), fg = cyan }, -- Diff mode: Added line |diff.txt|
@@ -180,9 +182,9 @@ local theme = lush(function(injected_function)
     -- See :h diagnostic-highlights, some groups may not be listed, submit a PR fix to lush-template!
     --
     DiagnosticError            { Error } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-    DiagnosticWarn             { fg = yellow.sa(50) } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
+    DiagnosticWarn             { fg = yellow } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
     DiagnosticInfo             { fg = cyan } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-    DiagnosticHint             { fg = blue.li(20) } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
+    DiagnosticHint             { fg = blue } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
     -- DiagnosticVirtualTextError { } , -- Used for "Error" diagnostic virtual text.
     -- DiagnosticVirtualTextWarn  { } , -- Used for "Warn" diagnostic virtual text.
     -- DiagnosticVirtualTextInfo  { } , -- Used for "Info" diagnostic virtual text.
@@ -200,12 +202,21 @@ local theme = lush(function(injected_function)
     -- DiagnosticSignInfo         { } , -- Used for "Info" signs in sign column.
     -- DiagnosticSignHint         { } , -- Used for "Hint" signs in sign column.
     --
+    -- Neogit graph color support
     NeogitGraphRed { fg = red },
     NeogitGraphGreen { fg = green },
-    NeogitGraphBlue { fg = cyan },
+    NeogitGraphBlue { fg = blue },
+    NeogitGraphCyan { fg = cyan},
     NeogitGraphYellow { fg = yellow },
     NeogitGraphPurple { fg = purple },
-    NeogitGraphOrange { fg = orange }
+    NeogitGraphOrange { fg = orange },
+    NeogitGraphBoldRed { fg = red, gui ="bold" },
+    NeogitGraphBoldGreen { fg = green, gui = "bold" },
+    NeogitGraphBoldBlue { fg = blue, gui = "bold" },
+    NeogitGraphBoldCyan { fg = cyan, gui = "bold" },
+    NeogitGraphBoldYellow { fg = yellow, gui = "bold" },
+    NeogitGraphBoldPurple { fg = purple, gui = "bold" },
+    NeogitGraphBoldOrange { fg = orange, gui = "bold" }
   }
 end)
 -- Return our parsed theme for extension or use elsewhere.
