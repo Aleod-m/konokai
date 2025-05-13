@@ -27,5 +27,4 @@ local function lualine_theme()
 end
 themes.lualine = lualine_theme()
 
-
 return themes

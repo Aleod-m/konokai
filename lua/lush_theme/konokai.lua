@@ -60,6 +60,9 @@ local theme = lush(function(injected_function)
     DiffDelete   { bg = red.da(60), fg = red}, -- Diff mode: Deleted line |diff.txt|
     DiffText { bg = red.da(60), fg = pink }, -- Diff mode: Deleted line |diff.txt|
     -- DiffText     { fg = red.da(60), bg = yellow }, -- Diff mode: Changed text within a changed line |diff.txt|
+    Added { DiffAdd },
+    Changed { DiffChange },
+    Removed { DiffDelete },
 
     Directory    { fg = cyan }, -- Directory names (and other special names in listings)
 
