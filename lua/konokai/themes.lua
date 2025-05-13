@@ -1,8 +1,8 @@
 local themes = {}
 local function lualine_theme()
     local colors = require'konokai'.palette
-    local bg = string.lower(colors.background.hex)
-    local fg = string.lower(colors.foreground.hex)
+    local bg = string.lower(colors.black.hex)
+    local fg = string.lower(colors.white.hex)
     local green = string.lower(colors.green.hex)
     local blue = string.lower(colors.blue.hex)
     local orange = string.lower(colors.orange.hex)
